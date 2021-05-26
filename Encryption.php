@@ -48,13 +48,17 @@ class Encryption
         $index_string = [];
 
         foreach ($explode_string as $explode_string_index => $explode_string_row) {
-            $index_string[array_search($explode_string_row, $this->abjad)] = $explode_string_index + 1;
+            // $index_string[array_search($explode_string_row, $this->abjad)] = $explode_string_index + 1;
+            $index_string[] = [
+                array_search($explode_string_row, $this->abjad),
+                $explode_string_index + 1
+            ];
         }
 
         $result_arr = [];
 
-        foreach ($index_string as $index_string_index => $index_string_row) {
-            $result_arr[] = $this->vigenere_square[$index_string_index][$index_string_row];
+        foreach ($index_string as $index_string_row) {
+            $result_arr[] = $this->vigenere_square[$index_string_row[0]][$index_string_row[1]];
         }
 
         $result = implode('', $result_arr);
